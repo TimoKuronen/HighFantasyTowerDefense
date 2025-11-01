@@ -3,10 +3,14 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Handles overall game state, win/lose toggling, and pausing
+/// </summary>
 public class GameManager : IGameManager, IDisposable
 {
     private bool pauseOn;
     private LevelData currentLevelData;
+
     public LevelData GetLevelData => currentLevelData;
     public Action VictoryEvent { get; set; }
     public Action DefeatEvent { get; set; }
@@ -33,6 +37,9 @@ public class GameManager : IGameManager, IDisposable
         Time.timeScale = newTimeScale;
     }
 
+    /// <summary>
+    /// Called via event when the player hits the restart button
+    /// </summary>
     private void RestartGame()
     {
         PauseToggle();
@@ -51,6 +58,9 @@ public class GameManager : IGameManager, IDisposable
         currentLevelData = allLevelData.FirstOrDefault(level => level.name.Contains(levelNumber));
     }
 
+    /// <summary>
+    /// Triggered when the player has lost all their gems
+    /// </summary>
     private void GameLost()
     {
         DefeatEvent?.Invoke();
@@ -59,6 +69,9 @@ public class GameManager : IGameManager, IDisposable
         Services.Get<IGameStateHandler>().SetGameState(GameState.Defeat);
     }
 
+    /// <summary>
+    /// Triggered when the player has defeated all waves
+    /// </summary>
     private void GameWon()
     {
         VictoryEvent?.Invoke();

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class WaveManager : IWaveManager, IDisposable
 {
+    private Dictionary<EnemyType, EnemyCharacter> enemyPrefabs;
+    private GameObject spawnerCoroutineObject;
+    private CoroutineMonoBehavior spawnerCoroutine;
     private EnemyData[] enemies;
     private WaveData waveData;
     private int currentWave = 0;
@@ -20,10 +23,6 @@ public class WaveManager : IWaveManager, IDisposable
     public static event Action AllEnemiesProcessed;
     public static event Action<EnemyCharacter> SpawnedEnemy;
     public event Action NewWaveStarted;
-
-    private Dictionary<EnemyType, EnemyCharacter> enemyPrefabs;
-    private GameObject spawnerCoroutineObject;
-    private CoroutineMonoBehavior spawnerCoroutine;
 
     public void Initialize()
     {
@@ -113,7 +112,7 @@ public class WaveManager : IWaveManager, IDisposable
     }
 
     /// <summary>
-    /// Spawn new wave
+    /// 
     /// </summary>
     /// <returns></returns>
     private IEnumerator SpawnWave()

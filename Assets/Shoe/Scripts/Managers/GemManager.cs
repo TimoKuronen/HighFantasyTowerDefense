@@ -38,7 +38,7 @@ public class GemManager : IGemManager, IDisposable
         // Instantiate gem container at the last waypoint position
         container = GameObject.Instantiate(
             Services.Get<IGameManager>().GetLevelData.GemContainerPrefab,
-             Services.Get<IPathFinder>().Waypoints[^1].transform.position,
+            Services.Get<IPathFinder>().Waypoints[^1].transform.position,
             Quaternion.identity).GetComponent<GemContainer>();
 
         // Initialize the container
@@ -116,9 +116,9 @@ public class GemManager : IGemManager, IDisposable
         EnemyCharacter.EnemyArrivedHomeEvent -= OnEnemyArrivedHome;
     }
 
-#if UNITY_EDITOR
     public void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.K))
         {
             AllGemsLost?.Invoke();

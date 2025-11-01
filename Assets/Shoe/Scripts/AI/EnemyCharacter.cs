@@ -39,7 +39,7 @@ public class EnemyCharacter : PooledMonoBehaviour
         if (audioSource == null)
             audioSource = GetComponent<AudioSource>();
 
-        if(PathFinder == null)
+        if (PathFinder == null)
             PathFinder = Services.Get<IPathFinder>();
 
         if (stateMachine == null)
